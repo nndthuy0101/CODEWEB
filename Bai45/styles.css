@@ -1,0 +1,112 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+    display:flex;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 2500px;
+  }
+  
+  header {
+    background-color: #ffffff;
+    padding: 25px 0;
+    margin:0;
+  }
+  
+  header{
+    background-image: url(hinh/scarp.png);
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+  .content {
+    display: flex;
+  }
+  .sidebar {
+    background-image: url(hinh/back.jpg);
+    height:100vh;
+    width:25%;
+    background-repeat:repeat-y;
+  }
+  .sidebar ul {
+    list-style: disc;
+    padding-left: 40px;
+    color:#d31b1b;
+  }
+  .main-content {
+    width: 100%;
+    padding-left: 15px;
+    background-color: #fff;
+    width:fit-content;
+  }
+  
+  .main-content h2 {
+    color: #ffcd27;
+  }
+  
+  .main-content h3 {
+    color: #ffcd27;
+  }
+  
+  .basic-materials {
+    background-color: #fff7e2;
+    border: 1px solid #c6a46d;
+    width:35%;
+    float: right;
+    color:#d31b1b;
+  }
+
+  
+  .basic-materials ul {
+    list-style: disc;
+    padding-left: 30px;
+  }
+
+
+  footer {
+    text-align:center;
+    font-size: 14px;
+    color:#ffeb3b
+  }
+  hr{
+    background-color: #ffeb3b;
+    border:none;
+    height:1px;
+  }
+  .basic-materials p{
+    color:#ffcd27;
+    font-size: 25px;
+  }
+  p{
+    color:#d31b1b
+  }
+  .basic-materials {
+    background-color: #fff7e2;
+    width: 40%;
+    float: right;
+    color: #d31b1b;
+    border: none;
+    padding: 15px;
+    position: relative;
+  }
+  
+  .basic-materials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent; 
+    border-image: linear-gradient(to left top, #bc9000 50%, #ffcd27 50% );
+    border-image-slice: 1; 
+    pointer-events: none; 
+    z-index: 1; 
+  }
+
+  

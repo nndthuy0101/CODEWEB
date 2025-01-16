@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <script>
+        function clearForm() {
+            document.getElementById("registrationForm").reset(); 
+        }
+        function simulateSearch() {
+            var section = document.querySelector('input[name="num1"]:checked');
+            var publications = [];
+            if (document.getElementById("mid").checked) publications.push("Midwest times");
+            if (document.getElementById("great").checked) publications.push("Great Lakes Classifieds");
+            if (document.getElementById("mod").checked) publications.push("Modern News");
+            if (document.getElementById("middl").checked) publications.push("Middleton Daily");
+            if (document.getElementById("emp").checked) publications.push("Employment");
+            if (document.getElementById("cash").checked) publications.push("Cashtown Daily News");
+
+            var fromDate = document.getElementById("fromDate").value;
+            var toDate = document.getElementById("toDate").value;
+            var keywords = document.querySelector('input[type="text"]').value;
+
+            var searchQuery = keywords + " " + (section ? section.value : "") + " " + publications.join(" ") + " from:" + fromDate + " to:" + toDate;
+            var googleSearchURL = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery);
+            window.open(googleSearchURL, "_blank");
+        }
+    </script>
+</head>
+<body style="background-color: #d0fcfc; color: rgb(7, 0, 0); font-family: Arial, sans-serif">
+    <h1 style="color: red; margin-top: 25px; width: 100%; text-align: left;">Online Classified Search Form</h1>
+    <hr style="border: 1px solid black; margin-top: 20px; margin-bottom: 20px;">
+
+    <h4>1) Search for a classified in the following sections</h4>
+    <form id="registrationForm">
+        <table>
+            <tr>
+                <td>
+                    <input type="radio" name="num1" value="employement" id="emp">
+                    <label for="emp">Employment</label><br/>
+                    <input type="radio" name="num1" value="sale" id="sale">
+                    <label for="sale">For Sale</label><br/>
+                    <input type="radio" name="num1" value="housing" id="house">
+                    <label for="house">Housing</label>
+                </td>
+                <td>
+                    <input type="radio" name="num1" value="personal" id="per">
+                    <label for="per">Personal</label><br/>
+                    <input type="radio" name="num1" value="miscellaneous" id="misce">
+                    <label for="misce">Miscellaneous</label><br/>
+                    <input type="radio" name="num1" value="All" id="al">
+                    <label for="al">All of the above</label>
+                </td>
+            </tr>
+        </table>
+
+        <h4>2) Search the following publications: </h4>
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="mid" value="Midwest">
+                    <label for="mid">Midwest times</label><br/>
+                    <input type="checkbox" id="great" value="GreatLakes">
+                    <label for="great">Great Lakes Classifieds</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="mod" value="modern">
+                    <label for="mod">Modern News</label><br/>
+                    <input type="checkbox" id="middl" value="middleton">
+                    <label for="middl">Middleton Daily</label>
+                </td>
+                <td>
+                    <input type="checkbox" id="emp" value="employement">
+                    <label for="emp">Employment Today</label><br/>
+                    <input type="checkbox" id="cash" value="cashtown">
+                    <label for="cash">Cashtown Daily News</label>
+                </td>
+            </tr>
+        </table>
+
+        <h4>3) From: <input type="date" id="fromDate"> to <input type="date" id="toDate"></h4>
+        <label for="enter"><h4 >4) Enter a few keywords to describe the classified:</h4></label>
+        <input type="text" style="width: 600px" name="enter" id="enter">
+        <h4>5) Click the button below to search:</h4>
+        <a href="#" onclick="simulateSearch()" target="_blank">
+            <img src="hinh/Search.gif" alt="Search" style="cursor: pointer;">
+        </a> 
+        <a href="https://www.help.com/" target="_blank">
+            <img src="hinh/Help.gif" alt="Help" style="cursor: pointer;">
+        </a>
+        <img src="hinh/Cancel.gif" alt="Cancel" onclick="clearForm()" style="cursor: pointer;">
+    </form>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Expense Report</title>
+    
+    <script>
+        function submitted()
+        {
+            alert("Đăng ký thành công!");
+        }
+        function reset()
+        {
+            document.querySelectorAll("input").forEach(input => {
+                if (input.type === "text") {
+                    input.value="";
+                } else if (input.type === "radio" || input.type === "checkbox") {
+                    input.checked = false;
+                }
+            });
+
+            // Đặt lại giá trị cho select nếu có
+            document.querySelectorAll("select").forEach(select => {
+                select.selectedIndex = 0;
+            });
+        }
+
+    </script>
+    
+
+    <style>
+        body {
+            background-color: #d0fcfc;
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        table {
+            margin: 10px 0;
+            width: auto;
+            height: auto;
+        }
+
+        table, th, td {
+            text-align: center; /* Căn giữa theo chiều ngang */
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        td:nth-child(1), th:nth-child(1) {
+            width: 140px; /* Điều chỉnh chiều rộng của cột "Amount" */
+        }
+
+        input[type="TEXT"] {
+            width: 200px; /* Thu nhỏ chiều rộng của cột Amount */
+        }
+
+        td:nth-child(2), th:nth-child(2) {
+            width: 400px; /* Điều chỉnh chiều rộng của cột Description */
+        }
+
+        td:nth-child(4), th:nth-child(4) {
+            width: 80px; /* Điều chỉnh chiều rộng của cột "Amount" */
+        }
+
+        input[type="number"] {
+            width: 50px; /* Thu nhỏ chiều rộng của cột Amount */
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <img src="DeLong.jpg" alt="Company Logo">
+    </center>   
+    <h2>Travel Expense Report</h2>
+    <hr style="border: 1px solid black;">
+    <form id="expenseForm">
+        <div>
+            <label for="firstname">1) First Name:</label>
+            <input type="text" name="firstname" id="firstname" style="width: 150px;">
+            <label for="lastname">Last Name: </label>
+            <input type="text" name="lastname" id="lastname" style="width: 150px;">
+        </div><br>
+        <div>
+            <label for="social">2) Social Security Number:</label> 
+            <input type="number" name="social" id="social" style="width: 100px;">
+        </div><br>
+        <div>
+            <label>3) Department:</label> 
+            <select style="width: 150px;">
+                <option>Accounting</option>
+                <option>Human Resources</option>
+                <option>...</option>
+            </select>
+        </div><br>
+        <div>
+            <label for="describe">4) Describe the purpose of your trip:</label><br>
+            <textarea name="describe" id="describe" style="width: 600px; height: 100px;"></textarea>
+        </div><br>
+        <div>
+            <label>5) Itemize your travel expenses:</label>
+            <table border="1">
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date1" id="date1"></td>
+                    <td><input type="text" name="description1" id="description1"></td>
+                    <td>
+                        <select>
+                            <option>Meal</option>
+                            <option>Transport</option>
+                            <option>Lodging</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="amount1" id="amount1"></td>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date2" id="date2"></td>
+                    <td><input type="text" name="description2" id="description2"></td>
+                    <td>
+                        <select>
+                            <option>Meal</option>
+                            <option>Transport</option>
+                            <option>Lodging</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="amount2" id="amount2"></td>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date3" id="date3"></td>
+                    <td><input type="text" name="description3" id="description3"></td>
+                    <td>
+                        <select>
+                            <option>Meal</option>
+                            <option>Transport</option>
+                            <option>Lodging</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="amount3" id="amount3"></td>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date4" id="date4"></td>
+                    <td><input type="text" name="description4" id="description4"></td>
+                    <td>
+                        <select>
+                            <option>Meal</option>
+                            <option>Transport</option>
+                            <option>Lodging</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="amount4" id="amount4"></td>
+                </tr>
+            </table>
+        </div><br>
+        <div>
+            <label>6) Have you submitted your receipts?</label><br>
+            <input type="radio" name="submitted" id="yes" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" name="submitted" id="no" value="no">
+            <label for="no">No</label>
+        </div><br>
+        <td>
+            <button type="submit" onclick="submitted()">Submit travel expenses</button>
+            <button type="reset" onclick="reset()">Reset</button>
+        </form>
+    </form>
+    <p>Questions? Contact Debbie Larson in Accounting (ext. 2150)</p>
+</body>
+</html>
