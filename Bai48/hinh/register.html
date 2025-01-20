@@ -6,9 +6,7 @@
         {
             alert("Đăng ký thành công!");
         }
-        function cancel()
-        {
-            // Lấy tất cả các input trong form và đặt về giá trị mặc định
+        function cancel() {
             document.querySelectorAll("input").forEach(input => {
                 if (input.type === "text") {
                     input.value = "";
@@ -16,10 +14,11 @@
                     input.checked = false;
                 }
             });
-
-            // Đặt lại giá trị cho select nếu có
             document.querySelectorAll("select").forEach(select => {
                 select.selectedIndex = 0;
+            });
+            document.querySelectorAll("textarea").forEach(textarea => {
+                textarea.value = "";
             });
         }
     </script>
@@ -167,3 +166,4 @@
     </table>
 </body>
 </html>
+
