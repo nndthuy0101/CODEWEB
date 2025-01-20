@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng ký thành viên</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table, th{
+            text-align: left;
+            font-weight: lighter;
+        }
+        tr:hover {
+            background-color: rgb(0, 64, 255);
+            color:white;
+        }
+        tr:not(:hover) {
+            background-color: white;
+        }
+        input[type="checkbox"] {
+            margin-left: 20px;
+        }
+        input[type="radio"]:not([name="gioitinh"]) {
+            margin-left: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Đăng ký thành viên</h1>
+    <hr>
+    <form>
+        <p>
+        <label for="ten">Tên (*):</label>
+        <input type="text" id="ten" name="ten"><br>
+        <label for="ngay">Ngày sinh (*):</label>
+        <select id="ngay"></select>
+        <select id="thang"></select>
+        <select id="nam"></select><br>
+        <label>Giới tính (*):</label>
+        <input type="radio" name="gioitinh" value="Nam"> Nam
+        <input type="radio" name="gioitinh" value="Nữ"> Nữ<br>
+        <label for="email">Email (*):</label>
+        <input type="email" id="email" name="email"></p>
+
+        <label>Sở thích của bạn:</label><br>
+        <input type="checkbox" name="sothich" value="Mua sắm"> Mua sắm<br>
+        <input type="checkbox" name="sothich" value="Du lịch"> Du lịch<br>
+        <input type="checkbox" name="sothich" value="Tán gẫu"> Tán gẫu<br>
+        <input type="checkbox" name="sothich" value="Đọc sách"> Đọc sách<br>
+        <input type="checkbox" name="sothich" value="Nghe nhạc"> Nghe nhạc<br>
+
+        <label>Màu yêu thích của bạn:</label><br>
+        <input type="radio" name="mauythich" value="Màu xanh da trời"> <span style="background-color: blue;;">Màu xanh da trời</span><br>
+        <input type="radio" name="mauythich" value="Màu đỏ"> <span style="background-color: red;;">Màu đỏ</span><br>
+        <input type="radio" name="mauythich" value="Màu vàng"> <span style="background-color: yellow;;">Màu vàng</span><br>
+        <input type="radio" name="mauythich" value="Màu xanh lá cây"> <span style="background-color: rgb(9, 132, 40);;">Màu xanh lá cây</span><br>
+        <input type="radio" name="mauythich" value="Màu xanh tím"> <span style="background-color: rgb(222, 132, 200);;">Màu xanh tím</span><br>
+        
+        <button type="button" onclick="dangKy()">Đăng ký</button>
+        <button type="reset" onclick="tiepTuc()">Tiếp</button>
+    </form>
+    <table id="bangThongTin">
+        <tr>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Giới tính</th>
+            <th>Ngày sinh</th>
+            <th>Sở thích</th>
+            <th>Màu yêu thích</th>
+        </tr>
+    </table>
+    <script>
+
+        function taoDanhSach() {
+            const ngaySelect = document.getElementById('ngay');
+            const thangSelect = document.getElementById('thang');
+            const namSelect = document.getElementById('nam');
+
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                ngaySelect.appendChild(option);
+            }
+
+            for (let i = 1; i <= 12; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                thangSelect.appendChild(option);
+            }
+
+            for (let i = 1970; i <= 2025; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = i;
+                namSelect.appendChild(option);
+            }
+        }
+        taoDanhSach();
+
+        // Hàm kiểm tra email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function dangKy() {
+            const ten = document.getElementById("ten").value;
+            const ngay = document.getElementById("ngay").value;
+            const thang = document.getElementById("thang").value;
+            const nam = document.getElementById("nam").value;
+            const gioiTinh = document.querySelector('input[name="gioitinh"]:checked').value;
+            const email = document.getElementById("email").value;
+
+            if (!isValidEmail(email)) {
+                alert("Địa chỉ email không hợp lệ!");
+                return;
+            }
+
+            const soThichCheckboxes = document.querySelectorAll('input[name="sothich"]:checked');
+            const soThich = Array.from(soThichCheckboxes).map(checkbox => checkbox.value).join(", ");
+
+            const mauYeuThich = document.querySelector('input[name="mauythich"]:checked').value;
+
+            const bangThongTin = document.getElementById("bangThongTin");
+            const newRow = bangThongTin.insertRow();
+
+            const cellTen = newRow.insertCell();
+            cellTen.textContent = ten;
+
+            const cellEmail = newRow.insertCell();
+            cellEmail.textContent = email;
+
+            const cellGioiTinh = newRow.insertCell();
+            cellGioiTinh.textContent = gioiTinh;
+
+            const cellNgaySinh = newRow.insertCell();
+            cellNgaySinh.textContent = ngay + "/" + thang + "/" + nam;
+
+            const cellSoThich = newRow.insertCell();
+            cellSoThich.textContent = soThich;
+
+            const cellMauYeuThich = newRow.insertCell();
+            cellMauYeuThich.textContent = mauYeuThich;
+        }
+
+        function tiepTuc() {
+            document.getElementById("ten").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("ngay").selectedIndex = 0;
+            document.getElementById("thang").selectedIndex = 0;
+            document.getElementById("nam").selectedIndex = 0;
+            document.querySelectorAll('input[name="gioitinh"]').forEach(radio => radio.checked = false);
+            document.querySelectorAll('input[name="sothich"]').forEach(checkbox => checkbox.checked = false);
+            document.querySelectorAll('input[name="mauythich"]').forEach(radio => radio.checked = false);
+            document.getElementById("ten").focus();
+        }
+    </script>
+</body>
+</html>
