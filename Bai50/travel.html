@@ -1,29 +1,22 @@
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Travel Expense Report</title>
-    
+    <style>
+        button{
+            height: 25px; 
+            padding-inline: 10px; 
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
     <script>
-        function submitted()
-        {
-            alert("Đăng ký thành công!");
+        function submitForm(){
+            alert("Form đã được gửi!")
         }
-        function reset()
-        {
-            document.querySelectorAll("input").forEach(input => {
-                if (input.type === "text") {
-                    input.value="";
-                } else if (input.type === "radio" || input.type === "checkbox") {
-                    input.checked = false;
-                }
-            });
-
-            // Đặt lại giá trị cho select nếu có
-            document.querySelectorAll("select").forEach(select => {
-                select.selectedIndex = 0;
-            });
+        function resetForm(){
+            document.getElementById("report").reset();
         }
-
     </script>
     
 
@@ -40,8 +33,8 @@
         }
 
         table, th, td {
-            text-align: center; /* Căn giữa theo chiều ngang */
-            vertical-align: middle; /* Căn giữa theo chiều dọc */
+            text-align: center;
+            vertical-align: middle;
         }
 
         hr {
@@ -49,23 +42,23 @@
         }
 
         td:nth-child(1), th:nth-child(1) {
-            width: 140px; /* Điều chỉnh chiều rộng của cột "Amount" */
+            width: 140px; 
         }
 
-        input[type="TEXT"] {
-            width: 200px; /* Thu nhỏ chiều rộng của cột Amount */
+        input[type="text"] {
+            width: 200px;
         }
 
         td:nth-child(2), th:nth-child(2) {
-            width: 400px; /* Điều chỉnh chiều rộng của cột Description */
+            width: 400px; 
         }
 
         td:nth-child(4), th:nth-child(4) {
-            width: 80px; /* Điều chỉnh chiều rộng của cột "Amount" */
+            width: 80px; 
         }
 
         input[type="number"] {
-            width: 50px; /* Thu nhỏ chiều rộng của cột Amount */
+            width: 50px; /
         }
     </style>
 </head>
@@ -74,7 +67,7 @@
         <img src="DeLong.jpg" alt="Company Logo">
     </center>   
     <h2>Travel Expense Report</h2>
-    <hr style="border: 1px solid black;">
+    <hr style="border: 1px solid brown;">
     <form id="expenseForm">
         <div>
             <label for="firstname">1) First Name:</label>
@@ -162,15 +155,15 @@
             </table>
         </div><br>
         <div>
-            <label>6) Have you submitted your receipts?</label><br>
+            <label>6) Have you submitted your receipts?</label>
             <input type="radio" name="submitted" id="yes" value="yes">
             <label for="yes">Yes</label>
             <input type="radio" name="submitted" id="no" value="no">
             <label for="no">No</label>
         </div><br>
         <td>
-            <button type="submit" onclick="submitted()">Submit travel expenses</button>
-            <button type="reset" onclick="reset()">Reset</button>
+            <button type="button" onclick="submitForm()">Submit travel expenses</button> 
+            <button type="button" onclick="reset()">Reset</button> 
         </form>
     </form>
     <p>Questions? Contact Debbie Larson in Accounting (ext. 2150)</p>
