@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách</title>
+    <style>
+        tr:hover {
+            cursor: pointer;
+        }
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        td, th {
+            text-align: left;
+        }
+        td, th{
+            border: 1px solid black;
+        }
+        #title {
+            text-align: center;
+        }
+    </style>
+    <script>
+        var dataset = "<sinhviens>";
+        dataset += "<sinhvien>";
+        dataset += "<mssv>K123456789</mssv>";
+        dataset += "<hoTen>Quách Thị Bán Bún Bò</hoTen>";
+        dataset += "<ngaySinh>7/7/1997</ngaySinh>";
+        dataset += "<gioiTinh>Nữ</gioiTinh>";
+        dataset += "</sinhvien>";
+        dataset += "<sinhvien>";
+        dataset += "<mssv>K12345000</mssv>";
+        dataset += "<hoTen>Hồng Lâu Mộng</hoTen>";
+        dataset += "<ngaySinh>2/2/1992</ngaySinh>";
+        dataset += "<gioiTinh>Nam</gioiTinh>";
+        dataset += "</sinhvien>";
+        dataset += "<sinhvien>";
+        dataset += "<mssv>K1674000</mssv>";
+        dataset += "<hoTen>Hồ Văn Đồ</hoTen>";
+        dataset += "<ngaySinh>2/7/1997</ngaySinh>";
+        dataset += "<gioiTinh>Nam</gioiTinh>";
+        dataset += "</sinhvien>";
+        dataset += "</sinhviens>";
+
+        var studentsArray = [];
+
+        function tai_danhsach_sinhvien() {
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(dataset, "text/xml");
+            var students = xmlDoc.getElementsByTagName("sinhvien");
+            studentsArray = Array.from(students).map(sti => ({
+                mssv: sti.getElementsByTagName("mssv")[0].childNodes[0].nodeValue,
+                hoTen: sti.getElementsByTagName("hoTen")[0].childNodes[0].nodeValue,
+                ngaySinh: sti.getElementsByTagName("ngaySinh")[0].childNodes[0].nodeValue,
+                gioiTinh: sti.getElementsByTagName("gioiTinh")[0].childNodes[0].nodeValue
+            }));
+            hien_danhsach(studentsArray);
+        }
+
+        function hien_danhsach(data) {
+            var tbodysinhvien = document.getElementById("tbodysinhvien");
+            tbodysinhvien.innerHTML = ""; // Xóa dữ liệu cũ
+
+            data.forEach(student => {
+                var tr = document.createElement("tr");
+
+                tr.addEventListener("mouseover", function () {
+                    this.style.backgroundColor = "yellow";
+                });
+                tr.addEventListener("mouseout", function () {
+                    this.style.backgroundColor = "white";
+                });
+
+                tr.addEventListener("click", function () {
+                    var url = "details.html?" + 
+                              "mssv=" + encodeURIComponent(student.mssv) + 
+                              "&hoTen=" + encodeURIComponent(student.hoTen) + 
+                              "&ngaySinh=" + encodeURIComponent(student.ngaySinh) + 
+                              "&gioiTinh=" + encodeURIComponent(student.gioiTinh);
+                    window.location.href = url;
+                });
+
+                var tdmssv = document.createElement("td");
+                tdmssv.innerText = student.mssv;
+                tr.appendChild(tdmssv);
+
+                var tdhoTen = document.createElement("td");
+                tdhoTen.innerText = student.hoTen;
+                tr.appendChild(tdhoTen);
+
+                var tdngaySinh = document.createElement("td");
+                tdngaySinh.innerText = student.ngaySinh;
+                tr.appendChild(tdngaySinh);
+
+                var tdgioiTinh = document.createElement("td");
+                tdgioiTinh.innerText = student.gioiTinh;
+                tr.appendChild(tdgioiTinh);
+
+                tbodysinhvien.appendChild(tr);
+            });
+        }
+
+        function sap_xep_theo_cot(column, asc) {
+            studentsArray.sort((a, b) => {
+                if (a[column] < b[column]) return asc ? -1 : 1;
+                if (a[column] > b[column]) return asc ? 1 : -1;
+                return 0;
+            });
+            hien_danhsach(studentsArray);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        tai_danhsach_sinhvien();
+
+        var thElements = document.querySelectorAll("thead th");
+        thElements.forEach((th, index) => {
+            // Kiểm tra nếu tiêu đề không phải "Danh sách sinh viên"
+            if (th.id !== "title") {  // Nếu không phải "Danh sách sinh viên"
+                var asc = true; 
+                th.addEventListener("click", function () {
+                    var column = ["mssv", "hoTen", "ngaySinh", "gioiTinh"][index];
+                    sap_xep_theo_cot(column, asc);
+                    asc = !asc; 
+                });
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th id="title" colspan="4" style="background-color: orange;">Danh sách sinh viên</th>
+            </tr>
+            <tr style="background-color: green; color:white">
+                <th>Mã sinh viên</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+            </tr>
+        </thead>
+        <tbody id="tbodysinhvien">
+        </tbody>
+    </table>
+</body>
+</html>

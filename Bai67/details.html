@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết Sinh viên</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        td {
+            text-align: left;
+        }
+        td, th{
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            // Lấy thông tin từ URL
+            var urlParams = new URLSearchParams(window.location.search);
+            var mssv = urlParams.get('mssv');
+            var hoTen = urlParams.get('hoTen');
+            var ngaySinh = urlParams.get('ngaySinh');
+            var gioiTinh = urlParams.get('gioiTinh');
+
+            // Hiển thị thông tin chi tiết sinh viên
+            document.getElementById("mssv").innerText = mssv;
+            document.getElementById("hoTen").innerText = hoTen;
+            document.getElementById("ngaySinh").innerText = ngaySinh;
+            document.getElementById("gioiTinh").innerText = gioiTinh;
+        };
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2" style="background-color: orange;">Thông tin chi tiết sinh viên</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Mã sinh viên:</strong></td>
+                <td><span id="mssv"></span></td>
+            </tr>
+            <tr>
+                <td><strong>Họ tên:</strong></td>
+                <td><span id="hoTen"></span></td>
+            </tr>
+            <tr>
+                <td><strong>Ngày sinh:</strong></td>
+                <td><span id="ngaySinh"></span></td>
+            </tr>
+            <tr>
+                <td><strong>Giới tính:</strong></td>
+                <td><span id="gioiTinh"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
