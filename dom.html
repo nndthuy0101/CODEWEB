@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin Sinh viên</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 40%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding-left: 8px;
+            text-align: left;
+        }
+        
+        tr.hover-row {
+            background-color: blue;
+            color: white;
+        }
+        table tr th{
+            font-weight:lighter;
+        }
+        th:first-child {
+            font-weight: bold; /* Chỉ giữ chữ đậm cho hàng tiêu đề đầu tiên */
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr><th colspan="2"; style="text-align: center; background-color: orange;">Chi tiết thông tin Sinh viên</th></tr>
+        <tr>
+            <td>Mã Sinh Viên</td>
+            <td id="mssv"></td>
+        </tr>
+        <tr>
+            <td>Họ tên</td>
+            <td id="hoTen"></td>
+        </tr>
+        <tr>
+            <td>Ngày Sinh</td>
+            <td id="ngaySinh"></td>
+        </tr>
+        <tr>
+            <td>Giới Tính</td>
+            <td id="gioiTinh"></td>
+        </tr>
+    </table>
+
+    <script>
+        // Chuỗi XML
+        var xmlString = `
+            <sinhvien>
+                <mssv>K123456789</mssv>
+                <hoTen>Quách Thị Bán Bún Bò</hoTen>
+                <ngaySinh>7/7/1997</ngaySinh>
+                <gioiTinh>Nữ</gioiTinh>
+            </sinhvien>
+        `;
+
+        // Parse XML và hiển thị dữ liệu
+        function loadData() {
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+            // Lấy dữ liệu từ XML
+            var mssv = xmlDoc.getElementsByTagName("mssv")[0].textContent;
+            var hoTen = xmlDoc.getElementsByTagName("hoTen")[0].textContent;
+            var ngaySinh = xmlDoc.getElementsByTagName("ngaySinh")[0].textContent;
+            var gioiTinh = xmlDoc.getElementsByTagName("gioiTinh")[0].textContent;
+
+            // Hiển thị dữ liệu lên bảng
+            document.getElementById("mssv").innerText = mssv;
+            document.getElementById("hoTen").innerText = hoTen;
+            document.getElementById("ngaySinh").innerText = ngaySinh;
+            document.getElementById("gioiTinh").innerText = gioiTinh;
+
+            // Thêm sự kiện hover cho các dòng
+            var rows = document.querySelectorAll("table tr");
+            rows.forEach(row => {
+                row.addEventListener("mouseover", function () {
+                    row.classList.add("hover-row");
+                });
+                row.addEventListener("mouseout", function () {
+                    row.classList.remove("hover-row");
+                });
+            });
+        }
+
+        // Gọi hàm loadData khi trang được tải
+        window.onload = loadData;
+    </script>
+</body>
+</html>
