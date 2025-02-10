@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin Sinh viên và Sách Mượn</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container {
+            width: 350px;
+            padding: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        th[colspan="2"] {
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        table th {
+            font-weight: normal;
+        }
+        td > table th {
+        font-weight: bold;
+        text-align: center;
+        }   
+        tbody tr:nth-child(odd) {
+            background-color: #e9e9e9;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .container table {
+            border: none;
+        }
+        .container tr {
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" ng-app="myApp" ng-controller="myCtrl">
+    <table>
+        <tr>
+            <th>Nhập Mã:</th>
+            <td><input type="text" ng-model="student.id" placeholder="Nhập mã sinh viên" /></td>
+        </tr>
+        <tr>
+            <th>Nhập Tên:</th>
+            <td><input type="text" ng-model="student.name" placeholder="Nhập tên sinh viên" /></td>
+        </tr>
+        <tr ng-if="student.id || student.name">
+            <th>Mã và Tên:</th>
+            <td>{{ student.id }} | {{ student.name }}</td>
+        </tr>
+        <tr ng-if="student.id || student.name">
+            <th colspan="2" style="text-align:left;">Danh sách Sách đang mượn:</th>
+        </tr>
+        <tr ng-if="student.id || student.name">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <th>Mã Sách</th>
+                        <th>Tên Sách</th>
+                        <th>Số Trang</th>
+                    </tr>
+                    <tr ng-repeat="book in books">
+                        <td>{{ book.Ma }}</td>
+                        <td>{{ book.Ten }}</td>
+                        <td>{{ book.Trang }}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function($scope) {
+        $scope.student = {
+            id: '',
+            name: ''
+        };
+        $scope.books = [
+            { Ma: 'S4', Ten: 'Bích Huyết Kiếm', Trang: 70 },
+            { Ma: 'S3', Ten: 'Tam Quốc Chí', Trang: 90 },
+            { Ma: 'S1', Ten: 'Hồng Lâu Mộng', Trang: 100 },
+            { Ma: 'S2', Ten: 'Tây Du Ký', Trang: 200 },
+            { Ma: 'S9', Ten: 'Hán Sở Tranh Hùng', Trang: 300 },
+            { Ma: 'S8', Ten: 'Chiến Quốc', Trang: 400 },
+            { Ma: 'S6', Ten: 'Thần Điêu Đại Hiệp', Trang: 500 },
+            { Ma: 'S7', Ten: 'Tần Thủy Hoàng', Trang: 600 },
+            { Ma: 'S10', Ten: 'Bảo Đao', Trang: 700 },
+            { Ma: 'S5', Ten: 'Anh Hùng Xạ Điêu', Trang: 1000 }
+        ];
+    });
+</script>
+
+</body>
+</html>
