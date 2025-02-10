@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+        }
+        tr:first-child {
+            background-color: yellow;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 50%;
+        }
+    </style>
+    <script>
+        var sanphams = [
+            { ma: "sp4", ten: "Chanh dây", gia: 12000 },
+            { ma: "sp1", ten: "Cocacola", gia: 15000 },
+            { ma: "sp3", ten: "Sting", gia: 17000 },
+            { ma: "sp5", ten: "pho mát", gia: 18000 },
+            { ma: "sp2", ten: "Pepsi", gia: 25000 }
+        ];
+
+        function hienThiSanPham(filteredProducts = sanphams) {
+            var table = "<table>";
+            table += "<tr><td>Mã Sản Phẩm</td><td>Tên Sản Phẩm</td><td>Đơn giá</td></tr>";
+
+            for (var i = 0; i < filteredProducts.length; i++) {
+                var sp = filteredProducts[i];
+                table += "<tr><td>" + sp.ma + "</td><td>" + sp.ten + "</td><td>" + sp.gia.toLocaleString() + "</td></tr>";
+            }
+
+            table += "</table>";
+            document.getElementById("sanphamTable").innerHTML = table;
+        }
+
+        function timKiemSanPham() {
+            var keyword = document.getElementById("searchBox").value.toLowerCase();
+            var filteredProducts = sanphams.filter(sp => 
+                sp.ma.toLowerCase().includes(keyword) || 
+                sp.ten.toLowerCase().includes(keyword)
+            );
+            hienThiSanPham(filteredProducts);
+        }
+
+        window.onload = function() {
+            hienThiSanPham();
+        }
+    </script>
+</head>
+<body>
+    <label for="searchBox">Muốn tìm gì: </label>
+    <input type="text" id="searchBox" onkeyup="timKiemSanPham()" placeholder="Nhập mã hoặc tên sản phẩm...">
+    <div id="sanphamTable"></div>
+</body>
+</html>
