@@ -1,0 +1,49 @@
+<html>
+<head>
+     <meta charset='utf-8'>
+     <title>Bai 72</title>
+     <script>
+        var dmMayTinh={
+            "Sanphams": [
+                {
+                    "MaSP": "sp_1xxx",
+                    "TenSP": "DELL Inspiron 14NR",
+                    "SoLuong": 100,
+                    "DonGia": 150000
+                },
+                {
+                    "MaSP": "sp_2yyyy",
+                    "TenSP": "HP Inspiron 113",
+                    "SoLuong": 130,
+                    "DonGia": 140000                    
+                }
+            ],
+                "MaDM": "DM1",
+                    "TenDM": "Hàng máy tính"
+        }
+        function xuLyHienThi()
+        {
+            var str = "Mã Danh Mục:" + dmMayTinh.MaDM + "<br/>"
+            str += "Tên Danh Mục:" + dmMayTinh.TenDM + "<br/>"
+            var table = "<table border='1'>"
+            var header = "<tr><td>Mã</td><td>Tên</td><td>Số lượng</td><td>Đơn giá</td></tr>"
+            table += header
+            for (var i = 0; i < dmMayTinh.Sanphams.length; i++)
+            {
+                var sp = dmMayTinh.Sanphams[i]
+                var tr = "<tr><td>" + sp.MaSP + "</td><td>" + sp.TenSP + "</td><td>" + sp.SoLuong + "</td><td>" + sp.DonGia + "</td></tr>"
+                table += tr
+            }
+            table += "</table>"
+            var div = document.getElementById("infor")
+            div.innerHTML = table
+        }
+    </script>
+
+</head>
+<body>
+    <input type="button" value="Hiển thị" onclick="xuLyHienThi()" />
+    <div id="infor"></div>
+
+</body>
+</html>
